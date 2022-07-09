@@ -1,5 +1,9 @@
 <!--index.wxml-->
 <view>
 <canvas canvas-id="myCanvas" style="width:319px;height:205;"></canvas>
+<view>
+图片 url: <input model:value="{{url}}" type="text" ></input>
+</view>
+<button bindtap="load">加载执行代码</button>
 <view>{{motto}}</view>
 </view>

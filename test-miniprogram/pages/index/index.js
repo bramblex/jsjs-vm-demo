@@ -5,12 +5,17 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
+    motto: '',
+    url: 'http://localhost:9080/target.png',
   },
+
   onReady() {
+  },
+
+  load() {
     const page = this;
     wx.downloadFile({
-      url: 'http://localhost:9080/target.png',
+      url: this.data.url,
       success({ tempFilePath }) {
         var ctx = wx.createCanvasContext('myCanvas');
 
@@ -60,4 +65,6 @@ Page({
       }
     })
   }
+
+
 });
