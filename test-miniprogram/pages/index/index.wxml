@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<view>
+<canvas canvas-id="myCanvas" style="width:319px;height:205;"></canvas>
+<view>{{motto}}</view>
+</view>
