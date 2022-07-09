@@ -4,84 +4,99 @@
 
 // 操作码 8 位
 export enum OpCode {
-  // 空指令，占位用
-  NOP = 0x00,
+  // 0x00 ~ 0x7F  立即数，直接向栈里面压入 UINT8 数据
+  NOP = 0x80, // 空指令，占位用
 
-  // push 基本数据
-  UNDEF = 0x01,
-  NULL = 0x02,
-  OBJ = 0x03,
-  ARR = 0x04,
-  TRUE = 0x05,
-  FALSE = 0x06,
+  // push 基本数据类型
+  UNDEF,
+  NULL,
+  OBJ,
+  ARR,
+  TRUE,
+  FALSE,
 
-  NUM = 0x07, // 后面跟 64 位 double 数字字面量
-  ADDR = 0x08,
-  STR = 0x09, // 后面跟 16 位为一个字符长度 0x0000 表示结尾的字符串字面量
+  // 字面量
+  UINT8,
+  UINT16,
+  UINT32,
+  INT8,
+  INT16,
+  INT32,
+  FLOAT16,
+  FLOAT32,
+  STR, // 跟 utf8 字符串 \0 结尾
 
-  // 基本栈操作
-  POP = 0x0A,
-  // SWP = 0x0B,
-  // CLEAN = 0x0C,
-  TOP = 0x0D,
-  TOP2 = 0x0E,
+  // 弹出栈操作
+  POP,
+  TOP,
+  TOP2, // 主要是各种对象操作用起来方便
 
-  // 数据存储
-  VAR = 0x10,
-  LOAD = 0x11,
-  OUT = 0x12,
+  // 变量和字面量存储和读取 (存储在栈低在栈低)
+  INIT,
+  LOAD,
+  OUT,
+
+  // 闭包内读取变量存储和读取
+  CINIT,
+  CLOAD,
+  COUT,
 
   // 分支跳转
-  JUMP = 0x20,
-  JUMPIF = 0x21,
-  JUMPNOT = 0x22,
+  JUMP,
+  JUMPIF,
+  JUMPNOT,
+
+  // 错误处理
+  TRY,
+  ENDTRY,
+  THROW,
 
   // 函数
-  FUNC = 0x30,
-  CALL = 0x31,
-  NEW = 0x32,
-  RET = 0x33,
+  FUNC,
+  CALL,
+  NEW,
+  RET,
 
   // 对象操作
-  GET = 0x40,
-  SET = 0x41,
-  // KEYS = 0x42,
-  IN = 0x43, // in
-  DELETE = 0x44, // delete
+  GET,
+  SET,
+  KEYS,
+  IN, // in
+  DELETE, // delete
 
   // 表运算
-  EQ = 0x50, // ==
-  NEQ = 0x51, // !=
-  SEQ = 0x52, // ===
-  SNEQ = 0x53, // !==
-  LT = 0x54, // <
-  LTE = 0x55, // <=
-  GT = 0x56, // >
-  GTE = 0x57,  // >=
+  EQ, // ==
+  NEQ, // !=
+  SEQ, // ===
+  SNEQ, // !==
+  LT, // <
+  LTE, // <=
+  GT, // >
+  GTE,  // >=
 
   // 数学运算
-  ADD = 0x60, // +
-  SUB = 0x61, // -
-  MUL = 0x62, // *
-  EXP = 0x63, // **
-  DIV = 0x64, // /
-  MOD = 0x65, // %
+  ADD, // +
+  SUB, // -
+  MUL, // *
+  EXP, // **
+  DIV, // /
+  MOD, // %
 
   // 位运算
-  BNOT = 0x70, // ~
-  BOR = 0x71, // |
-  BXOR = 0x72, // ^
-  BAND = 0x73,// &
-  LSHIFT = 0x73, // <<
-  RSHIFT = 0x75, // >>
-  URSHIFT = 0x76,// >>>
+  BNOT, // ~
+  BOR, // |
+  BXOR, // ^
+  BAND,// &
+  LSHIFT, // <<
+  RSHIFT, // >>
+  URSHIFT,// >>>
 
   // 逻辑运算
-  OR = 0x80, // ||
-  AND = 0x81, // &&
-  NOT = 0x82, // !
+  OR, // ||
+  AND, // &&
+  NOT, // !
 
   // 类型运算
-  INSOF = 0x90, // instanceof
-  TYPEOF = 0x91, // typeof
+  INSOF, // instanceof
+  TYPEOF, // typeof
 }
